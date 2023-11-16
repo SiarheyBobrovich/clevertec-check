@@ -8,4 +8,3 @@ CREATE TABLE public.goods
     quantity_in_stock INTEGER CHECK ( quantity_in_stock >= 0 ),
     wholesale_goods   BOOLEAN     NOT NULL default false
 );
-

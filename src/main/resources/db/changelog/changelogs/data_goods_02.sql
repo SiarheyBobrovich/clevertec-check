@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset sbobrovich:create-table-goods
+--changeset sbobrovich:insert-data-goods
 INSERT INTO public.goods (description, price, quantity_in_stock, wholesale_goods)
 VALUES ('Milk', 1.07, 10, true),
        ('cream 400g', 2.71, 20, true),
