@@ -1,4 +1,4 @@
-package ru.clevertec.check.dto;
+package ru.clevertec.check.dto.response;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -8,14 +8,16 @@ import java.io.IOException;
 import java.io.Writer;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class Title implements Printable {
+public class CheckTitle implements Printable {
 
     LocalDate date;
     LocalTime time;
 
-    public Title() {
+    public CheckTitle() {
         this.date = LocalDate.now();
         this.time = LocalTime.now();
     }
@@ -26,8 +28,9 @@ public class Title implements Printable {
                 .append(CheckConstant.DELIMITER)
                 .append(CheckConstant.Title.TIME)
                 .append('\n')
-                .append(date.toString())
+                .append(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
                 .append(CheckConstant.DELIMITER)
-                .append(time.toString());
+                .append(time.truncatedTo(ChronoUnit.SECONDS).toString())
+                .append('\n');
     }
 }

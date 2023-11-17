@@ -1,4 +1,4 @@
-package ru.clevertec.check.dto;
+package ru.clevertec.check.dto.response;
 
 import lombok.Builder;
 import ru.clevertec.check.constant.CheckConstant;
@@ -21,6 +21,11 @@ public record BalancedDiscountCard(BigDecimal balance,
                 .append(number.toString())
                 .append(CheckConstant.DELIMITER)
                 .append(discountPercentage.toString())
-                .append(CheckConstant.PERCENTAGE);
+                .append(CheckConstant.PERCENTAGE)
+                .append('\n');
+    }
+
+    public boolean isDefault() {
+        return number == null;
     }
 }

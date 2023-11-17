@@ -1,7 +1,8 @@
-package ru.clevertec.check.dto;
+package ru.clevertec.check.dto.response;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import ru.clevertec.check.constant.CheckConstant;
 
@@ -12,9 +13,9 @@ import java.util.List;
 
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class Body implements Printable {
+public class CheckBody implements Printable {
 
-    List<GoodResponseDto> goodList;
+    List<OrderResponseDto> goodList;
 
     @Override
     public void print(Writer writer) throws IOException {
@@ -29,23 +30,25 @@ public class Body implements Printable {
                 .append(CheckConstant.Body.TOTAL)
                 .append('\n');
 
-        for (GoodResponseDto good : goodList) {
-            good.print(writer);
-            writer.write('\n');
-        }
+        goodList.forEach(good -> print(good, writer));
     }
 
     public BigDecimal getTotalPrice() {
         return goodList.stream()
-                .map(GoodResponseDto::getTotal)
+                .map(OrderResponseDto::getTotal)
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
     }
 
     public BigDecimal getTotalDiscount() {
         return goodList.stream()
-                .map(GoodResponseDto::getDiscount)
+                .map(OrderResponseDto::getDiscount)
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
+    }
+
+    @SneakyThrows
+    private void print(Printable printable, Writer writer) {
+        printable.print(writer);
     }
 }

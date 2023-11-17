@@ -1,30 +1,31 @@
-package ru.clevertec.check.dto;
+package ru.clevertec.check.dto.response;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 import java.io.IOException;
 import java.io.Writer;
 
 @Getter
-@Builder
-@AllArgsConstructor
+@SuperBuilder
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class Check implements Printable {
 
-    Title title;
-    Body body;
-    Total total;
+    CheckTitle checkTitle;
+    CheckBody checkBody;
+    CheckTotal checkTotal;
 
     @Override
     public void print(Writer writer) throws IOException {
-        title.print(writer);
+        checkTitle.print(writer);
         writer.append('\n');
-        body.print(writer);
+        checkBody.print(writer);
         writer.append('\n');
-        total.print(writer);
+        checkTotal.print(writer);
+        writer.append('\n');
     }
 }

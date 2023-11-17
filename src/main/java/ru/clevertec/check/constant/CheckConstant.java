@@ -2,9 +2,13 @@ package ru.clevertec.check.constant;
 
 import lombok.experimental.UtilityClass;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @UtilityClass
 public class CheckConstant {
 
+    public static final Path FILE_PATH = Paths.get("./result.csv");
     public static final char CURRENCY = '$';
     public static final char PERCENTAGE = '%';
     public static final char DELIMITER = ';';
@@ -45,6 +49,8 @@ public class CheckConstant {
 
         public static final String ERROR = "ERROR";
         public static final String BAD_REQUEST = "BAD REQUEST";
+        public static final String INTERNAL_SERVER_ERROR = "INTERNAL SERVER ERROR";
+        public static final String BALANCE_NOT_AVAILABLE = "BALANCE NOT AVAILABLE";
     }
 
 }

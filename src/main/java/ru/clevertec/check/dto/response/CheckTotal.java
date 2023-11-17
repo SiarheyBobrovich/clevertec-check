@@ -1,4 +1,4 @@
-package ru.clevertec.check.dto;
+package ru.clevertec.check.dto.response;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class Total implements Printable {
+public class CheckTotal implements Printable {
 
     BigDecimal totalPrice;
     BigDecimal totalDiscount;

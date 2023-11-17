@@ -2,7 +2,7 @@ package ru.clevertec.check.exception;
 
 import lombok.Getter;
 import ru.clevertec.check.constant.CheckConstant;
-import ru.clevertec.check.dto.Printable;
+import ru.clevertec.check.dto.response.Printable;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -27,6 +27,7 @@ public class ProductQuantityInStockIsNotAvailableException extends Exception imp
         writer.append(CheckConstant.Exception.ERROR)
                 .append('\n')
                 .append(CheckConstant.Exception.BAD_REQUEST)
+                .append('\n')
                 .flush();
     }
 }

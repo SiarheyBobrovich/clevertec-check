@@ -1,4 +1,4 @@
-package ru.clevertec.check.dto;
+package ru.clevertec.check.dto.request;
 
 import lombok.Builder;
 

@@ -1,4 +1,4 @@
-package ru.clevertec.check.dto;
+package ru.clevertec.check.dto.response;
 
 import lombok.Builder;
 import ru.clevertec.check.constant.CheckConstant;
@@ -14,7 +14,7 @@ import static java.math.RoundingMode.HALF_UP;
  * DTO for {@link Good}
  */
 @Builder
-public class GoodResponseDto implements Printable {
+public class OrderResponseDto implements Printable {
 
     private final String description;
     private final BigDecimal price;
@@ -33,11 +33,12 @@ public class GoodResponseDto implements Printable {
                 .append(price.toString())
                 .append(CheckConstant.CURRENCY)
                 .append(CheckConstant.DELIMITER)
-                .append(discount.toString())
+                .append(getDiscount().toString())
                 .append(CheckConstant.CURRENCY)
                 .append(CheckConstant.DELIMITER)
                 .append(price.multiply(BigDecimal.valueOf(count)).setScale(2, HALF_UP).toString())
-                .append(CheckConstant.CURRENCY);
+                .append(CheckConstant.CURRENCY)
+                .append('\n');
     }
 
     public BigDecimal getDiscount() {

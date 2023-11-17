@@ -4,17 +4,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.clevertec.check.dto.Printable;
+import ru.clevertec.check.dto.response.Printable;
+import ru.clevertec.check.exception.FileCreationException;
 import ru.clevertec.check.service.PrintService;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Slf4j
 @Service
@@ -22,14 +22,11 @@ import java.nio.file.Paths;
 public class PrintServiceImpl implements PrintService {
 
     @Override
-    @SneakyThrows
-    public void printToFile(String filepath, Printable printable) {
-        Path path = Paths.get(filepath);
-        if (!Files.exists(path)) {
-            Files.createFile(path);
-        }
+    public void printToFile(Path filepath, Printable printable) {
+        log.info("Try to create file: {}", filepath.toAbsolutePath());
+        File file = creteFile(filepath);
 
-        try (Writer writer = new BufferedWriter(new FileWriter(path.toFile()))) {
+        try (Writer writer = new BufferedWriter(new FileWriter(file))) {
             print(writer, printable);
 
         } catch (IOException exception) {
@@ -37,14 +34,33 @@ public class PrintServiceImpl implements PrintService {
         }
     }
 
+    @SneakyThrows
+    private File creteFile(Path path) {
+        File file = path.toFile();
+
+        if (!file.exists() && !file.createNewFile()) {
+            log.info("Can't create file: {}", file);
+            throw new FileCreationException();
+        }
+
+        return file;
+    }
+
     @Override
     public void printToConsole(Printable printable) {
-        try (Writer writer = new OutputStreamWriter(System.out)) {
+        try {
+            Writer writer = new OutputStreamWriter(System.out);
             print(writer, printable);
+            writer.flush();
 
         } catch (IOException exception) {
             log.info("Can't print to console: {}", printable);
         }
+    }
+
+    @Override
+    public void printExternalErrorToFile(Path filePath, Printable printable) {
+        printToFile(filePath, printable);
     }
 
     private void print(Writer writer, Printable printable) throws IOException {

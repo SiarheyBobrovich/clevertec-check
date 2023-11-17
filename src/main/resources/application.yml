@@ -3,3 +3,5 @@ spring:
     url: jdbc:postgresql://localhost:5432/check
     username: postgres
     password: postgres
+  liquibase:
+    drop-first: true
