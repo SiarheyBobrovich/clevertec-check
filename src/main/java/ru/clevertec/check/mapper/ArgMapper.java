@@ -9,8 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.reducing;
 import static java.util.stream.Collectors.toMap;
 
 @Mapper
@@ -42,15 +40,12 @@ public abstract class ArgMapper {
                 .filter(arg -> arg.matches("^[0-9]*-[0-9].*"))
                 .map(arg -> arg.split("-"))
                 .filter(arg -> arg.length == 2)
-                .filter(arg -> arg[0].matches("[0-9]+"))
-                .filter(arg -> arg[1].matches("[0-9]+"))
-                .collect(groupingBy(
-                        arg -> Long.parseLong(arg[0]),
-                        reducing(0, arg -> Integer.parseInt(arg[1]), Integer::sum)))
-                .entrySet().stream()
+                .filter(arg -> arg[0].matches("-?[0-9]+"))
+                .filter(arg -> arg[1].matches("-?[0-9]+"))
+                .map(arg -> Map.entry(arg[0], arg[1]))
                 .map(entry -> GoodDto.builder()
-                        .id(entry.getKey())
-                        .quantity(entry.getValue())
+                        .id(Long.parseLong(entry.getKey()))
+                        .quantity(Integer.parseInt(entry.getValue()))
                         .build())
                 .toList();
     }
