@@ -1,10 +1,10 @@
 package ru.clevertec.check.dto.response;
 
 import lombok.AccessLevel;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import ru.clevertec.check.constant.CheckConstant;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,7 +23,8 @@ public class CheckTitle implements Printable {
     }
 
     @Override
-    public void print(Writer writer) throws IOException {
+    @SneakyThrows
+    public void print(Writer writer) {
         writer.append(CheckConstant.Title.DATE)
                 .append(CheckConstant.DELIMITER)
                 .append(CheckConstant.Title.TIME)

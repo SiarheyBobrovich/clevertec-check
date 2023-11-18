@@ -20,7 +20,7 @@ public class CheckFactoryImpl implements CheckFactory {
 
     @Override
     public Check createCheck(List<GoodInfo> goodInfoList,
-                             BalancedDiscountCard discountCard) throws BalanceNotAvailableException {
+                             BalancedDiscountCard discountCard) {
         List<OrderResponseDto> orderResponseList = buildOrderResponseList(goodInfoList, discountCard);
 
         checkBalance(orderResponseList, discountCard);

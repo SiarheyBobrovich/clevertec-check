@@ -24,9 +24,9 @@ public class OrderServiceImpl implements OrderService {
     private final CheckFactory checkFactory;
 
     @Override
-    public Check generateCheck(Bucket args) throws Exception {
-        List<GoodInfo> goodInfos = goodService.subtractCountAndGet(args.orderList());
-        BalancedDiscountCard discountCardDto = discountCardService.getWithBalance(args.cardDto());
+    public Check generateCheck(Bucket bucket) {
+        List<GoodInfo> goodInfos = goodService.subtractCountAndGet(bucket.getGoods());
+        BalancedDiscountCard discountCardDto = discountCardService.getWithBalance(bucket.getDiscountCard());
 
         return checkFactory.createCheck(goodInfos, discountCardDto);
     }

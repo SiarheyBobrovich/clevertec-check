@@ -5,5 +5,5 @@ import ru.clevertec.check.dto.response.Check;
 
 public interface OrderService {
 
-    Check generateCheck(Bucket args) throws Exception;
+    Check generateCheck(Bucket args);
 }

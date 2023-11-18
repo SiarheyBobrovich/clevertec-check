@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import ru.clevertec.check.exception.PrintableException;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -18,14 +19,19 @@ public class DiscountCheck extends Check {
     BalancedDiscountCard balancedDiscountCard;
 
     @Override
-    public void print(Writer writer) throws IOException {
-        getCheckTitle().print(writer);
-        writer.write('\n');
-        getCheckBody().print(writer);
-        writer.write('\n');
-        balancedDiscountCard.print(writer);
-        writer.write('\n');
-        getCheckTotal().print(writer);
-        writer.write('\n');
+    public void print(Writer writer) {
+        try {
+            getCheckTitle().print(writer);
+            writer.write('\n');
+            getCheckBody().print(writer);
+            writer.write('\n');
+            balancedDiscountCard.print(writer);
+            writer.write('\n');
+            getCheckTotal().print(writer);
+            writer.write('\n');
+
+        } catch (IOException e) {
+            throw new PrintableException();
+        }
     }
 }

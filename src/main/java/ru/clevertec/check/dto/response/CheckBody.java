@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import ru.clevertec.check.constant.CheckConstant;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,7 +17,8 @@ public class CheckBody implements Printable {
     List<OrderResponseDto> goodList;
 
     @Override
-    public void print(Writer writer) throws IOException {
+    @SneakyThrows
+    public void print(Writer writer) {
         writer.append(CheckConstant.Body.QTY)
                 .append(CheckConstant.DELIMITER)
                 .append(CheckConstant.Body.DESCRIPTION)

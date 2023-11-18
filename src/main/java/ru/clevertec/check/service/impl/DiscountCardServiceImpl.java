@@ -3,8 +3,8 @@ package ru.clevertec.check.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.clevertec.check.dto.response.BalancedDiscountCard;
 import ru.clevertec.check.dto.request.DiscountCardDto;
+import ru.clevertec.check.dto.response.BalancedDiscountCard;
 import ru.clevertec.check.mapper.DiscountCardMapper;
 import ru.clevertec.check.repository.DiscountCardRepository;
 import ru.clevertec.check.service.DiscountCardService;
@@ -19,10 +19,11 @@ public class DiscountCardServiceImpl implements DiscountCardService {
 
     @Override
     public BalancedDiscountCard getWithBalance(DiscountCardDto discountCardDto) {
-        return discountCardDto.number() == null ?
+        Integer cardNumber = discountCardDto.getNumber();
+        return cardNumber == null ?
                 discountCardMapper.toDefaultDiscountCard(discountCardDto) :
-                discountCardRepository.findByNumber(discountCardDto.number())
-                        .map(card -> discountCardMapper.toBalancedDiscountCard(card, discountCardDto.balance()))
+                discountCardRepository.findByNumber(cardNumber)
+                        .map(card -> discountCardMapper.toBalancedDiscountCard(card, discountCardDto.getBalance()))
                         .orElseGet(() -> discountCardMapper.toDefaultDiscountCard(discountCardDto));
     }
 }

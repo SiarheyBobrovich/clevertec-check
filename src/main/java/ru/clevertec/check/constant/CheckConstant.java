@@ -50,7 +50,7 @@ public class CheckConstant {
         public static final String ERROR = "ERROR";
         public static final String BAD_REQUEST = "BAD REQUEST";
         public static final String INTERNAL_SERVER_ERROR = "INTERNAL SERVER ERROR";
-        public static final String BALANCE_NOT_AVAILABLE = "BALANCE NOT AVAILABLE";
+        public static final String BALANCE_NOT_AVAILABLE = "NOT ENOUGH MONEY";
     }
 
 }

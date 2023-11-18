@@ -1,10 +1,10 @@
 package ru.clevertec.check.dto.response;
 
 import lombok.Builder;
+import lombok.SneakyThrows;
 import ru.clevertec.check.constant.CheckConstant;
 import ru.clevertec.check.entity.Good;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.math.BigDecimal;
 
@@ -25,7 +25,8 @@ public class OrderResponseDto implements Printable {
     private BigDecimal totalDiscount;
 
     @Override
-    public void print(Writer writer) throws IOException {
+    @SneakyThrows
+    public void print(Writer writer) {
         writer.append(count.toString())
                 .append(CheckConstant.DELIMITER)
                 .append(description)
@@ -39,6 +40,7 @@ public class OrderResponseDto implements Printable {
                 .append(price.multiply(BigDecimal.valueOf(count)).setScale(2, HALF_UP).toString())
                 .append(CheckConstant.CURRENCY)
                 .append('\n');
+
     }
 
     public BigDecimal getDiscount() {

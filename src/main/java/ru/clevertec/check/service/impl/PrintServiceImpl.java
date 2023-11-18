@@ -1,11 +1,11 @@
 package ru.clevertec.check.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.clevertec.check.dto.response.Printable;
 import ru.clevertec.check.exception.FileCreationException;
+import ru.clevertec.check.exception.PrintableException;
 import ru.clevertec.check.service.PrintService;
 
 import java.io.BufferedWriter;
@@ -34,13 +34,18 @@ public class PrintServiceImpl implements PrintService {
         }
     }
 
-    @SneakyThrows
     private File creteFile(Path path) {
         File file = path.toFile();
 
-        if (!file.exists() && !file.createNewFile()) {
-            log.info("Can't create file: {}", file);
+        try {
+            if (!file.exists() && !file.createNewFile()) {
+                log.info("Can't create file: {}", file);
+                throw new FileCreationException();
+            }
+
+        } catch (IOException e) {
             throw new FileCreationException();
+
         }
 
         return file;
@@ -55,6 +60,7 @@ public class PrintServiceImpl implements PrintService {
 
         } catch (IOException exception) {
             log.info("Can't print to console: {}", printable);
+            throw new PrintableException();
         }
     }
 
@@ -63,7 +69,7 @@ public class PrintServiceImpl implements PrintService {
         printToFile(filePath, printable);
     }
 
-    private void print(Writer writer, Printable printable) throws IOException {
+    private void print(Writer writer, Printable printable) {
         printable.print(writer);
     }
 }

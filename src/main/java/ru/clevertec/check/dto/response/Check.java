@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import ru.clevertec.check.exception.PrintableException;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -20,12 +21,17 @@ public class Check implements Printable {
     CheckTotal checkTotal;
 
     @Override
-    public void print(Writer writer) throws IOException {
-        checkTitle.print(writer);
-        writer.append('\n');
-        checkBody.print(writer);
-        writer.append('\n');
-        checkTotal.print(writer);
-        writer.append('\n');
+    public void print(Writer writer) {
+        try {
+            checkTitle.print(writer);
+            writer.append('\n');
+            checkBody.print(writer);
+            writer.append('\n');
+            checkTotal.print(writer);
+            writer.append('\n');
+
+        } catch (IOException e) {
+            throw new PrintableException();
+        }
     }
 }

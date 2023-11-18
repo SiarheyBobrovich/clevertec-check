@@ -4,7 +4,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import ru.clevertec.check.controller.MainOrderController;
+import ru.clevertec.check.processor.MainOrderProcessor;
 
 @SpringBootApplication
 public class CheckApplication {
@@ -16,7 +16,7 @@ public class CheckApplication {
                 .main(CheckApplication.class)
                 .run(args);
 
-        context.getBean(MainOrderController.class)
+        context.getBean(MainOrderProcessor.class)
                 .processOrder(args);
     }
 

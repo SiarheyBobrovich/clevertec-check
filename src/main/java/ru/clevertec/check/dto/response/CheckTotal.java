@@ -2,10 +2,10 @@ package ru.clevertec.check.dto.response;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import ru.clevertec.check.constant.CheckConstant;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.math.BigDecimal;
 
@@ -18,7 +18,8 @@ public class CheckTotal implements Printable {
     BigDecimal totalWithDiscount;
 
     @Override
-    public void print(Writer writer) throws IOException {
+    @SneakyThrows
+    public void print(Writer writer) {
         writer.append(CheckConstant.Total.TOTAL_PRICE)
                 .append(CheckConstant.DELIMITER)
                 .append(CheckConstant.Total.TOTAL_DISCOUNT)

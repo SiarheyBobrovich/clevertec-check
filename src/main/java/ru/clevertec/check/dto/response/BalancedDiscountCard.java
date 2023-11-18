@@ -1,9 +1,9 @@
 package ru.clevertec.check.dto.response;
 
 import lombok.Builder;
+import lombok.SneakyThrows;
 import ru.clevertec.check.constant.CheckConstant;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.math.BigDecimal;
 
@@ -13,7 +13,8 @@ public record BalancedDiscountCard(BigDecimal balance,
                                    Byte discountPercentage) implements Printable {
 
     @Override
-    public void print(Writer writer) throws IOException {
+    @SneakyThrows
+    public void print(Writer writer) {
         writer.append(CheckConstant.DiscountCard.DISCOUNT_CARD)
                 .append(CheckConstant.DELIMITER)
                 .append(CheckConstant.DiscountCard.DISCOUNT_PERCENTAGE)

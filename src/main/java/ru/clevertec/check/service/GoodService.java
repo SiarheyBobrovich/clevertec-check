@@ -1,13 +1,12 @@
 package ru.clevertec.check.service;
 
-import ru.clevertec.check.dto.request.Order;
 import ru.clevertec.check.dto.GoodInfo;
-import ru.clevertec.check.exception.ProductQuantityInStockIsNotAvailableException;
+import ru.clevertec.check.dto.request.GoodDto;
 
 import java.util.List;
 
 public interface GoodService {
 
-    List<GoodInfo> subtractCountAndGet(List<Order> orderList) throws ProductQuantityInStockIsNotAvailableException;
+    List<GoodInfo> subtractCountAndGet(List<GoodDto> goodDtoList);
 
 }

@@ -1,13 +1,12 @@
 package ru.clevertec.check.service;
 
 import ru.clevertec.check.dto.response.Printable;
-import ru.clevertec.check.exception.FileCreationException;
 
 import java.nio.file.Path;
 
 public interface PrintService {
 
-    void printToFile(Path filepath, Printable printable) throws FileCreationException;
+    void printToFile(Path filepath, Printable printable);
 
     void printToConsole(Printable printable);
 
