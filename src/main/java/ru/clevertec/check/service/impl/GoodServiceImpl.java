@@ -7,7 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.check.dto.GoodInfo;
 import ru.clevertec.check.dto.request.GoodDto;
 import ru.clevertec.check.entity.Good;
-import ru.clevertec.check.exception.ProductQuantityInStockIsNotAvailableException;
+import ru.clevertec.check.exception.GoodNotFoundException;
+import ru.clevertec.check.exception.GoodQuantityInStockIsNotAvailableException;
 import ru.clevertec.check.mapper.GoodMapper;
 import ru.clevertec.check.repository.GoodRepository;
 import ru.clevertec.check.service.GoodService;
@@ -31,7 +32,13 @@ public class GoodServiceImpl implements GoodService {
         Map<Long, Integer> idCountMap = goodDtoList.stream()
                 .collect(Collectors.toMap(GoodDto::id, GoodDto::quantity));
 
-        return goodRepository.findAllById(idCountMap.keySet()).stream()
+        List<Good> allById = goodRepository.findAllById(idCountMap.keySet());
+
+        if (allById.size() != idCountMap.size()) {
+            throw new GoodNotFoundException();
+        }
+
+        return allById.stream()
                 .map(good -> updateQuantityInStock(good, idCountMap.get(good.getId())))
                 .map(goodRepository::saveAndFlush)
                 .map(good -> goodMapper.toGoodInfo(good, idCountMap.get(good.getId())))
@@ -42,7 +49,7 @@ public class GoodServiceImpl implements GoodService {
         int remain = good.getQuantityInStock() - orderCount;
 
         if (remain < 0) {
-            throw new ProductQuantityInStockIsNotAvailableException();
+            throw new GoodQuantityInStockIsNotAvailableException();
         }
 
         good.setQuantityInStock(remain);

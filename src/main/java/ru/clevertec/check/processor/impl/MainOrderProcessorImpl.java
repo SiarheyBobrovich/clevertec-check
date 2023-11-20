@@ -14,6 +14,7 @@ import ru.clevertec.check.exception.ValidationException;
 import ru.clevertec.check.mapper.ArgMapper;
 import ru.clevertec.check.processor.MainOrderProcessor;
 import ru.clevertec.check.service.PrintService;
+import ru.clevertec.check.validation.Validator;
 
 import java.util.List;
 
@@ -27,14 +28,15 @@ public class MainOrderProcessorImpl implements MainOrderProcessor {
     private final ArgMapper argMapper;
     private final PrintService printService;
     private final MainOrderController orderController;
+    private final Validator<String[]> validator;
 
     @Override
     public void processOrder(String[] args) {
         log.info("Main args: {}", List.of(args));
 
-        Bucket bucket = argMapper.parseArg(args);
-
         try {
+            validator.validate(args);
+            Bucket bucket = argMapper.parseArg(args);
             Check check = orderController.createCheck(bucket);
             print(check);
 

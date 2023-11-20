@@ -1,0 +1,9 @@
+discountCard=1111 balanceDebitCard=1
+1- 1-7 discountCard=1111 balanceDebitCard=1
+-1 discountCard=1111 balanceDebitCard=1
+1=1 discountCard=1111 balanceDebitCard=1
+1-1 discountCard=1111
+1-1 discountCard=1111 balanceDebitCard=
+1-1 discountCard=1111 balanceDebitCard-1
+1-1 discountCard= balanceDebitCard=1
+1-1 discountCard-1 balanceDebitCard=1
