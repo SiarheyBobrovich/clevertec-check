@@ -1,0 +1,120 @@
+[
+  {
+    "goods": null,
+    "discountcard": "1111",
+    "balancedebitcard": "1"
+  },
+  {
+    "goods": [],
+    "discountcard": "1111",
+    "balancedebitcard": "1"
+  },
+  {
+    "goods": [
+      {
+        "id": 1
+      }
+    ],
+    "discountcard": "1111",
+    "balancedebitcard": "1"
+  },
+  {
+    "goods": [
+      {
+        "quantity": 1
+      }
+    ],
+    "discountcard": "1111",
+    "balancedebitcard": "1"
+  },
+  {
+    "goods": [
+      {
+        "id": 1,
+        "quantity": -1
+      }
+    ],
+    "discountcard": "1111",
+    "balancedebitcard": "1"
+  },
+  {
+    "goods": [
+      {
+        "id": 1,
+        "quantity": 1
+      }
+    ],
+    "discountcard": "",
+    "balancedebitcard": "1"
+  },
+  {
+    "goods": [
+      {
+        "id": 1,
+        "quantity": 1
+      }
+    ],
+    "discountcard": "999",
+    "balancedebitcard": "1"
+  },
+  {
+    "goods": [
+      {
+        "id": 1,
+        "quantity": 1
+      }
+    ],
+    "discountcard": "10000",
+    "balancedebitcard": "1"
+  },
+  {
+    "goods": [
+      {
+        "id": 1,
+        "quantity": 1
+      }
+    ],
+    "discountcard": "aaaa",
+    "balancedebitcard": "1"
+  },
+  {
+    "goods": [
+      {
+        "id": 1,
+        "quantity": 1
+      }
+    ],
+    "discountcard": "1111",
+    "balancedebitcard": null
+  },
+  {
+    "goods": [
+      {
+        "id": 1,
+        "quantity": 1
+      }
+    ],
+    "discountcard": "1111",
+    "balancedebitcard": ""
+  },
+  {
+    "goods": [
+      {
+        "id": 1,
+        "quantity": 1
+      }
+    ],
+    "discountcard": "1111",
+    "balancedebitcard": "a12"
+  },
+  {
+    "goods": [
+      {
+        "id": 1,
+        "quantity": 1
+      }
+    ],
+    "discountcard": "1111",
+    "balancedebitcard": "-1"
+  }
+]

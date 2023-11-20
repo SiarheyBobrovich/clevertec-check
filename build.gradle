@@ -7,7 +7,6 @@ plugins {
 
 group = 'ru.clevertec'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '21'
 
 configurations {
 	compileOnly {
@@ -19,14 +18,26 @@ repositories {
 	mavenCentral()
 }
 
+compileJava {
+    sourceCompatibility = '21'
+	options.compilerArgs = [
+			'-Amapstruct.defaultComponentModel=spring'
+	]
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
 	runtimeOnly "org.postgresql:postgresql"
 	implementation 'org.liquibase:liquibase-core'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.testcontainers:postgresql:1.17.6'
 }
 
 tasks.named('test') {
