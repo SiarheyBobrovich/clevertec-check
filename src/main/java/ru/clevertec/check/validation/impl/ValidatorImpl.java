@@ -6,26 +6,42 @@ import ru.clevertec.check.exception.ValidationException;
 import ru.clevertec.check.validation.Validator;
 
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 @Component
 public class ValidatorImpl implements Validator<String[]> {
 
     @Override
     public void validate(String[] args) {
-        boolean isExistAnyGood = Arrays.stream(args)
-                .anyMatch(arg -> arg.matches("(\\d+--?\\d+)"));
+        checkExistAnyProducts(args);
+        checkExistBalance(args);
+        checkArgs(args);
+    }
 
-        boolean isExistBalance = Arrays.stream(args)
+    private void checkExistAnyProducts(String[] args) {
+        if (Arrays.stream(args)
+                .noneMatch(arg -> arg.matches("(\\d+--?\\d+)"))) {
+            throw new ValidationException();
+        }
+    }
+
+    private void checkExistBalance(String[] args) {
+        if (Arrays.stream(args)
                 .filter(arg -> arg.matches("(balanceDebitCard=-?(\\d+\\.?\\d*))"))
-                .count() == 1;
+                .count() != 1) {
+            throw new ValidationException();
+        }
+    }
 
-        boolean b = Arrays.stream(args)
-                .allMatch(arg ->
-                        arg != null &&
-                                !StringUtils.isBlank(arg) &&
-                                arg.matches("(\\d+--?\\d+)|(discountCard=((\\d{4})|(null)))|(balanceDebitCard=-?(\\d+\\.?\\d*))"));
+    private void checkArgs(String[] args) {
+        boolean isAllArgsMatch = Arrays.stream(args)
+                .filter(Objects::nonNull)
+                .filter(Predicate.not(StringUtils::isBlank))
+                .filter(arg -> arg.matches("(\\d+--?\\d+)|(discountCard=((\\d{4})|(null)))|(balanceDebitCard=-?(\\d+\\.?\\d*))"))
+                .count() == args.length;
 
-        if (!isExistAnyGood || !isExistBalance || !b) {
+        if (!isAllArgsMatch) {
             throw new ValidationException();
         }
     }

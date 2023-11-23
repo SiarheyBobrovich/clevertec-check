@@ -1,120 +1,110 @@
 [
   {
-    "goods": null,
-    "discountcard": "1111",
-    "balancedebitcard": "1"
+    "products": null,
+    "discountCard": "1111",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [],
-    "discountcard": "1111",
-    "balancedebitcard": "1"
+    "products": [],
+    "discountCard": "1111",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1
       }
     ],
-    "discountcard": "1111",
-    "balancedebitcard": "1"
+    "discountCard": "1111",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "quantity": 1
       }
     ],
-    "discountcard": "1111",
-    "balancedebitcard": "1"
+    "discountCard": "1111",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": -1
       }
     ],
-    "discountcard": "1111",
-    "balancedebitcard": "1"
+    "discountCard": "1111",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 1
       }
     ],
-    "discountcard": "",
-    "balancedebitcard": "1"
+    "discountCard": "",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 1
       }
     ],
-    "discountcard": "999",
-    "balancedebitcard": "1"
+    "discountCard": "999",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 1
       }
     ],
-    "discountcard": "10000",
-    "balancedebitcard": "1"
+    "discountCard": "10000",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 1
       }
     ],
-    "discountcard": "aaaa",
-    "balancedebitcard": "1"
+    "discountCard": "aaaa",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 1
       }
     ],
-    "discountcard": "1111",
-    "balancedebitcard": null
+    "discountCard": "1111",
+    "balanceDebitCard": null
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 1
       }
     ],
-    "discountcard": "1111",
-    "balancedebitcard": ""
+    "discountCard": "1111",
+    "balanceDebitCard": ""
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 1
       }
     ],
-    "discountcard": "1111",
-    "balancedebitcard": "a12"
-  },
-  {
-    "goods": [
-      {
-        "id": 1,
-        "quantity": 1
-      }
-    ],
-    "discountcard": "1111",
-    "balancedebitcard": "-1"
+    "discountCard": "1111",
+    "balanceDebitCard": "a12"
   }
 ]

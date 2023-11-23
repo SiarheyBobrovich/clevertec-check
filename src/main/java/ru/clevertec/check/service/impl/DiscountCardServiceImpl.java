@@ -20,10 +20,11 @@ public class DiscountCardServiceImpl implements DiscountCardService {
     @Override
     public BalancedDiscountCard getWithBalance(DiscountCardDto discountCardDto) {
         Integer cardNumber = discountCardDto.getNumber();
-        return cardNumber == null ?
-                discountCardMapper.toDefaultDiscountCard(discountCardDto) :
-                discountCardRepository.findByNumber(cardNumber)
-                        .map(card -> discountCardMapper.toBalancedDiscountCard(card, discountCardDto.getBalance()))
-                        .orElseGet(() -> discountCardMapper.toDefaultDiscountCard(discountCardDto));
+        return switch (cardNumber) {
+            case null -> discountCardMapper.toNoneDiscountCard(discountCardDto);
+            default -> discountCardRepository.findByNumber(cardNumber)
+                    .map(card -> discountCardMapper.toBalancedDiscountCard(card, discountCardDto.getBalance()))
+                    .orElseGet(() -> discountCardMapper.toDefaultDiscountCard(discountCardDto));
+        };
     }
 }

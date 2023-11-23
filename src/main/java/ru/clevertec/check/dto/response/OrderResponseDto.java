@@ -3,7 +3,7 @@ package ru.clevertec.check.dto.response;
 import lombok.Builder;
 import lombok.SneakyThrows;
 import ru.clevertec.check.constant.CheckConstant;
-import ru.clevertec.check.entity.Good;
+import ru.clevertec.check.entity.Product;
 
 import java.io.Writer;
 import java.math.BigDecimal;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_UP;
 
 /**
- * DTO for {@link Good}
+ * DTO for {@link Product}
  */
 @Builder
 public class OrderResponseDto implements Printable {

@@ -28,9 +28,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldNameConstants
-@Table(name = "goods")
+@Table(name = "product")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Good {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +45,14 @@ public class Good {
     @Column(name = "quantity_in_stock", columnDefinition = "CHECK (quantity_in_stock >= 0)")
     Integer quantityInStock;
 
-    @Column(name = "wholesale_goods", nullable = false)
-    Boolean wholesaleGoods;
+    @Column(name = "wholesale_product", nullable = false)
+    Boolean wholesaleProduct;
+
+    public Product(Product cloneable) {
+        this.id = cloneable.id;
+        this.price = cloneable.price;
+        this.description = cloneable.description;
+        this.quantityInStock = cloneable.quantityInStock;
+        this.wholesaleProduct = cloneable.wholesaleProduct;
+    }
 }

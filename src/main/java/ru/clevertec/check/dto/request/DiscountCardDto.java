@@ -21,7 +21,7 @@ public class DiscountCardDto {
     private String number;
 
     @NotNull
-    @Pattern(regexp = "^\\d++\\.?\\d*")
+    @Pattern(regexp = "^-?\\d++\\.?\\d*")
     private String balance;
 
     public Integer getNumber() {

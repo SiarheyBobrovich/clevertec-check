@@ -17,4 +17,7 @@ public interface DiscountCardMapper {
 
     @Mapping(target = "discountPercentage", expression = "java((byte)2)")
     BalancedDiscountCard toDefaultDiscountCard(DiscountCardDto discountCardDto);
+
+    @Mapping(target = "discountPercentage", expression = "java((byte)0)")
+    BalancedDiscountCard toNoneDiscountCard(DiscountCardDto discountCardDto);
 }

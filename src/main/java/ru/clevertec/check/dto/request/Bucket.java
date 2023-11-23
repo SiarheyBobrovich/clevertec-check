@@ -22,20 +22,20 @@ public class Bucket {
     @Valid
     @NotNull
     @NotEmpty
-    @JsonProperty("goods")
-    private final List<GoodDto> goods;
+    @JsonProperty("products")
+    private final List<ProductDto> products;
 
     @Valid
     @NotNull
     @Builder.Default
     private final DiscountCardDto discountCard = new DiscountCardDto();
 
-    @JsonProperty(value = "discountcard")
+    @JsonProperty(value = "discountCard")
     public void setDiscountCard(String discountCard) {
         this.discountCard.setNumber(discountCard);
     }
 
-    @JsonProperty(value = "balancedebitcard")
+    @JsonProperty(value = "balanceDebitCard")
     public void setBalanceDebitCard(String balanceDebitCard) {
         this.discountCard.setBalance(balanceDebitCard);
     }
