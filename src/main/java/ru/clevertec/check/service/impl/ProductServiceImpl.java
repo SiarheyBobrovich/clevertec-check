@@ -24,6 +24,12 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
+    /**
+     * Метод уменьшает количество продуктов в DB и возвращает обработанный продукт
+     *
+     * @param productDtoList Список идентификаторов продуктов с количеством
+     * @return Список с Информацией по продуктам
+     */
     @Override
     public List<ProductInfo> subtractCountAndGet(List<ProductDto> productDtoList) {
         Map<Long, Integer> idCountMap = productDtoList.stream()
@@ -34,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
         if (allById.size() != idCountMap.size()) {
             throw new GoodNotFoundException();
         }
+
         return allById.stream()
                 .map(good -> updateQuantityInStock(good, idCountMap.get(good.getId())))
                 .map(productRepository::saveAndFlush)

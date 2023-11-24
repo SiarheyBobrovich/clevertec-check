@@ -10,5 +10,4 @@ public interface PrintService {
 
     void printToConsole(Printable printable);
 
-    void printExternalErrorToFile(Path filePath, Printable printable);
 }

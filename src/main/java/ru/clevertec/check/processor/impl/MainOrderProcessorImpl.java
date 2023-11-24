@@ -3,6 +3,7 @@ package ru.clevertec.check.processor.impl;
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.clevertec.check.controller.MainOrderController;
 import ru.clevertec.check.dto.request.Bucket;
@@ -16,9 +17,9 @@ import ru.clevertec.check.processor.MainOrderProcessor;
 import ru.clevertec.check.service.PrintService;
 import ru.clevertec.check.validation.Validator;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-
-import static ru.clevertec.check.constant.CheckConstant.FILE_PATH;
 
 @Slf4j
 @Component
@@ -30,6 +31,17 @@ public class MainOrderProcessorImpl implements MainOrderProcessor {
     private final MainOrderController orderController;
     private final Validator<String[]> validator;
 
+    /**
+     * Path to the saved file
+     */
+    @Value("${spring.product.data.save.file}")
+    private String filePath;
+
+    /**
+     * Запускает процесс обработки заказа из аргументов
+     *
+     * @param args Аргументы заказа
+     */
     @Override
     public void processOrder(String[] args) {
         log.info("Main args: {}", List.of(args));
@@ -52,12 +64,13 @@ public class MainOrderProcessorImpl implements MainOrderProcessor {
     }
 
     private void print(Printable printable) {
+        Path path = Paths.get(filePath);
         try {
-            printService.printToFile(FILE_PATH, printable);
+            printService.printToFile(path, printable);
             printService.printToConsole(printable);
 
         } catch (FileCreationException fileCreationException) {
-            printService.printExternalErrorToFile(FILE_PATH, fileCreationException);
+            printService.printToFile(path, fileCreationException);
             printService.printToConsole(printable);
         }
     }
