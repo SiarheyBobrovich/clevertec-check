@@ -38,7 +38,7 @@ public class ValidatorImpl implements Validator<String[]> {
         boolean isAllArgsMatch = Arrays.stream(args)
                 .filter(Objects::nonNull)
                 .filter(Predicate.not(StringUtils::isBlank))
-                .filter(arg -> arg.matches("(\\d+--?\\d+)|(discountCard=((\\d{4})|(null)))|(balanceDebitCard=-?(\\d+\\.?\\d*))|(pathToFile=.*)"))
+                .filter(arg -> arg.matches("(\\d+--?\\d+)|(discountCard=((\\d{4})|(null)))|(balanceDebitCard=-?(\\d+\\.?\\d*))"))
                 .count() == args.length;
 
         if (!isAllArgsMatch) {

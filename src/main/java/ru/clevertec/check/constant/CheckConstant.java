@@ -2,13 +2,9 @@ package ru.clevertec.check.constant;
 
 import lombok.experimental.UtilityClass;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 @UtilityClass
 public class CheckConstant {
 
-    public static final Path FILE_PATH = Paths.get("./result.csv");
     public static final char CURRENCY = '$';
     public static final char PERCENTAGE = '%';
     public static final char DELIMITER = ';';

@@ -6,3 +6,7 @@ spring:
   liquibase:
     drop-first: true
     enabled: false
+  product:
+    data:
+      save:
+        file: ./result.csv
