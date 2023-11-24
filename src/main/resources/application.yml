@@ -10,3 +10,4 @@ spring:
     data:
       save:
         file: ./result.csv
+      path: ./src/main/resources/products.csv

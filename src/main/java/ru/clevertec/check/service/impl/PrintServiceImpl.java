@@ -21,16 +21,40 @@ import java.nio.file.Path;
 @RequiredArgsConstructor
 public class PrintServiceImpl implements PrintService {
 
+    /**
+     * Метод создаёт {@link Writer} и делегирует {@link Printable} печать
+     *
+     * @param filepath  Путь к файлу для печати
+     * @param printable Объект класса {@link Printable}, в котором реализована логика печати в {@link Writer}
+     */
     @Override
     public void printToFile(Path filepath, Printable printable) {
         log.info("Try to create file: {}", filepath.toAbsolutePath());
         File file = creteFile(filepath);
 
         try (Writer writer = new BufferedWriter(new FileWriter(file))) {
-            print(writer, printable);
+            printable.print(writer);
 
         } catch (IOException exception) {
             log.info("File not found: {}", filepath);
+        }
+    }
+
+    /**
+     * Метод создаёт {@link Writer} для печати в консоль и делегирует объекту {@link Printable} печать
+     *
+     * @param printable Объект класса {@link Printable}, в котором реализована логика печати в {@link Writer}
+     */
+    @Override
+    public void printToConsole(Printable printable) {
+        try {
+            Writer writer = new OutputStreamWriter(System.out);
+            printable.print(writer);
+            writer.flush();
+
+        } catch (IOException exception) {
+            log.info("Can't print to console: {}", printable);
+            throw new PrintableException();
         }
     }
 
@@ -51,25 +75,4 @@ public class PrintServiceImpl implements PrintService {
         return file;
     }
 
-    @Override
-    public void printToConsole(Printable printable) {
-        try {
-            Writer writer = new OutputStreamWriter(System.out);
-            print(writer, printable);
-            writer.flush();
-
-        } catch (IOException exception) {
-            log.info("Can't print to console: {}", printable);
-            throw new PrintableException();
-        }
-    }
-
-    @Override
-    public void printExternalErrorToFile(Path filePath, Printable printable) {
-        printToFile(filePath, printable);
-    }
-
-    private void print(Writer writer, Printable printable) {
-        printable.print(writer);
-    }
 }

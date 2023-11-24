@@ -31,9 +31,17 @@ public class MainOrderProcessorImpl implements MainOrderProcessor {
     private final MainOrderController orderController;
     private final Validator<String[]> validator;
 
+    /**
+     * Path to the saved file
+     */
     @Value("${spring.product.data.save.file}")
     private String filePath;
 
+    /**
+     * Запускает процесс обработки заказа из аргументов
+     *
+     * @param args Аргументы заказа
+     */
     @Override
     public void processOrder(String[] args) {
         log.info("Main args: {}", List.of(args));
@@ -62,7 +70,7 @@ public class MainOrderProcessorImpl implements MainOrderProcessor {
             printService.printToConsole(printable);
 
         } catch (FileCreationException fileCreationException) {
-            printService.printExternalErrorToFile(path, fileCreationException);
+            printService.printToFile(path, fileCreationException);
             printService.printToConsole(printable);
         }
     }

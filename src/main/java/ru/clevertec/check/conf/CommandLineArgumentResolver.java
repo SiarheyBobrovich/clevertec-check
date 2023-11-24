@@ -16,9 +16,7 @@ public class CommandLineArgumentResolver {
         Arrays.stream(args)
                 .forEach(arg -> {
                     if (arg.startsWith("pathToFile")) {
-                        argsWrapper.addSpringArg(
-                                "--spring.product.data.file=true",
-                                "--spring.product.data.path=" + arg.split("=")[1]);
+                        argsWrapper.addSpringArg("--spring.product.data.path=" + arg.split("=")[1]);
 
                     } else if (arg.startsWith("saveToFile")) {
                         argsWrapper.addSpringArg("--spring.product.data.save.file=" + arg.split("=")[1]);

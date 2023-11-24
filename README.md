@@ -77,3 +77,9 @@ java ̺ RunnerClassName ̺ 3-1 ̺ 2-5 ̺ 5-1 ̺ discountCard=1111 ̺ balanceDebi
 | 5                                                                          | XXXX         | 2                  |
 | 6                                                                          | XXXX         | 2                  |
 | 7                                                                          | XXXX         | 2                  |
+
+## TEST ARGS
+- 3-1 2-5 5-1 discountCard=1111 balanceDebitCard=100
+- 3-1 2-5 5-1 balanceDebitCard=100
+- 3-1 2-5 5-1 discountCard=1111 balanceDebitCard=0
+- 1-1 1-3 2-5 discountCard=1212 balanceDebitCard=140.99 pathToFile=./products.csv saveToFile=result_file.csv
