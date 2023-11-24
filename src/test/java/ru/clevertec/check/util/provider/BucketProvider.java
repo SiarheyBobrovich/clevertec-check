@@ -30,7 +30,7 @@ public class BucketProvider implements ArgumentsProvider {
     }
 
     private String toValidArgs(Bucket bucket) {
-        String idQtyArgs = bucket.getGoods().stream()
+        String idQtyArgs = bucket.getProducts().stream()
                 .map(good -> good.id() + "-" + good.quantity())
                 .reduce((arg1, arg2) -> String.join(" ", arg1, arg2))
                 .orElse("");

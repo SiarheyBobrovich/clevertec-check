@@ -3,7 +3,7 @@ package ru.clevertec.check.mapper;
 import org.mapstruct.Mapper;
 import ru.clevertec.check.dto.request.Bucket;
 import ru.clevertec.check.dto.request.DiscountCardDto;
-import ru.clevertec.check.dto.request.GoodDto;
+import ru.clevertec.check.dto.request.ProductDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +16,7 @@ public abstract class ArgMapper {
 
     public Bucket parseArg(String[] args) {
         return Bucket.builder()
-                .goods(parseArgsToOrderList(args))
+                .products(parseArgsToOrderList(args))
                 .discountCard(parseArgsToCardDto(args))
                 .build();
     }
@@ -35,7 +35,7 @@ public abstract class ArgMapper {
                 .build();
     }
 
-    private List<GoodDto> parseArgsToOrderList(String[] args) {
+    private List<ProductDto> parseArgsToOrderList(String[] args) {
         return Arrays.stream(args)
                 .filter(arg -> arg.matches("^[0-9]*-[0-9].*"))
                 .map(arg -> arg.split("-"))
@@ -43,7 +43,7 @@ public abstract class ArgMapper {
                 .filter(arg -> arg[0].matches("-?[0-9]+"))
                 .filter(arg -> arg[1].matches("-?[0-9]+"))
                 .map(arg -> Map.entry(arg[0], arg[1]))
-                .map(entry -> GoodDto.builder()
+                .map(entry -> ProductDto.builder()
                         .id(Long.parseLong(entry.getKey()))
                         .quantity(Integer.parseInt(entry.getValue()))
                         .build())

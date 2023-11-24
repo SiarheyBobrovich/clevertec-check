@@ -5,7 +5,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Builder;
 
 @Builder
-public record GoodDto(
+public record ProductDto(
 
         @NotNull
         @PositiveOrZero

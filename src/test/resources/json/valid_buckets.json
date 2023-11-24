@@ -1,26 +1,26 @@
 [
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 1
       }
     ],
-    "discountcard": "1111",
-    "balancedebitcard": "1"
+    "discountCard": "1111",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 0
       }
     ],
-    "discountcard": "1111",
-    "balancedebitcard": "1"
+    "discountCard": "1111",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 1,
         "quantity": 1
@@ -30,36 +30,36 @@
         "quantity": 10
       }
     ],
-    "discountcard": "1111",
-    "balancedebitcard": "1"
+    "discountCard": "1111",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 20,
         "quantity": 1
       }
     ],
-    "balancedebitcard": "1"
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 20,
         "quantity": 1
       }
     ],
-    "discountcard": "9999",
-    "balancedebitcard": "1"
+    "discountCard": "9999",
+    "balanceDebitCard": "1"
   },
   {
-    "goods": [
+    "products": [
       {
         "id": 20,
         "quantity": 1
       }
     ],
-    "discountcard": "9999",
-    "balancedebitcard": "0"
+    "discountCard": "9999",
+    "balanceDebitCard": "0"
   }
 ]

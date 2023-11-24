@@ -1,7 +1,7 @@
 package ru.clevertec.check.factory.impl;
 
 import org.springframework.stereotype.Component;
-import ru.clevertec.check.dto.GoodInfo;
+import ru.clevertec.check.dto.ProductInfo;
 import ru.clevertec.check.dto.response.BalancedDiscountCard;
 import ru.clevertec.check.dto.response.Check;
 import ru.clevertec.check.dto.response.CheckBody;
@@ -19,9 +19,9 @@ import java.util.List;
 public class CheckFactoryImpl implements CheckFactory {
 
     @Override
-    public Check createCheck(List<GoodInfo> goodInfoList,
+    public Check createCheck(List<ProductInfo> productInfoList,
                              BalancedDiscountCard discountCard) {
-        List<OrderResponseDto> orderResponseList = buildOrderResponseList(goodInfoList, discountCard);
+        List<OrderResponseDto> orderResponseList = buildOrderResponseList(productInfoList, discountCard);
 
         checkBalance(orderResponseList, discountCard);
 
@@ -37,14 +37,14 @@ public class CheckFactoryImpl implements CheckFactory {
                 .orElseThrow(BalanceNotAvailableException::new);
     }
 
-    private List<OrderResponseDto> buildOrderResponseList(List<GoodInfo> goodInfoList,
+    private List<OrderResponseDto> buildOrderResponseList(List<ProductInfo> productInfoList,
                                                           BalancedDiscountCard discountCard) {
-        return goodInfoList.stream()
+        return productInfoList.stream()
                 .map(goodInfo -> OrderResponseDto.builder()
                         .price(goodInfo.price())
                         .description(goodInfo.description())
                         .count(goodInfo.count())
-                        .discount(goodInfo.isTradePrice() && goodInfo.count() > 5 ? 10 : discountCard.discountPercentage())
+                        .discount(goodInfo.isTradePrice() && goodInfo.count() >= 5 ? 10 : discountCard.discountPercentage())
                         .build()
                 ).toList();
     }
