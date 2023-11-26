@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.clevertec.check.dto.ProductInfo;
 import ru.clevertec.check.dto.request.Bucket;
 import ru.clevertec.check.dto.request.ProductDto;
-import ru.clevertec.check.dto.response.BalancedDiscountCard;
+import ru.clevertec.check.dto.BalancedDiscountCard;
 import ru.clevertec.check.dto.response.Check;
 import ru.clevertec.check.factory.CheckFactory;
 import ru.clevertec.check.service.DiscountCardService;

@@ -1,38 +1,44 @@
 package ru.clevertec.check.dto.response;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.SneakyThrows;
-import lombok.experimental.FieldDefaults;
-import ru.clevertec.check.constant.CheckConstant;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.io.Writer;
 import java.math.BigDecimal;
 
-@Builder
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CheckTotal implements Printable {
+@Component
+@Scope("prototype")
+@RequiredArgsConstructor
+public class CheckTotal extends AbstractTitlePrintable {
 
-    BigDecimal totalPrice;
-    BigDecimal totalDiscount;
-    BigDecimal totalWithDiscount;
+    @Value("${app.constant.base.currency}")
+    private String currency;
+
+    @Value("${app.constant.base.delimiter}")
+    private String delimiter;
+
+    @Getter
+    @Value("${app.constant.total}")
+    private String title;
+
+    private final CheckBody checkBody;
 
     @Override
-    @SneakyThrows
-    public void print(Writer writer) {
-        writer.append(CheckConstant.Total.TOTAL_PRICE)
-                .append(CheckConstant.DELIMITER)
-                .append(CheckConstant.Total.TOTAL_DISCOUNT)
-                .append(CheckConstant.DELIMITER)
-                .append(CheckConstant.Total.TOTAL_WITH_DISCOUNT)
-                .append('\n')
-                .append(totalPrice.toString())
-                .append(CheckConstant.CURRENCY)
-                .append(CheckConstant.DELIMITER)
+    protected void printBody(Writer writer) throws IOException {
+        BigDecimal totalPrice = checkBody.getTotalPrice();
+        BigDecimal totalDiscount = checkBody.getTotalDiscount();
+
+        writer.append(totalPrice.toString())
+                .append(currency)
+                .append(delimiter)
                 .append(totalDiscount.toString())
-                .append(CheckConstant.CURRENCY)
-                .append(CheckConstant.DELIMITER)
-                .append(totalWithDiscount.toString())
-                .append(CheckConstant.CURRENCY);
+                .append(currency)
+                .append(delimiter)
+                .append(totalPrice.subtract(totalDiscount).toString())
+                .append(currency);
     }
 }

@@ -42,9 +42,9 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return allById.stream()
-                .map(good -> updateQuantityInStock(good, idCountMap.get(good.getId())))
+                .map(product -> updateQuantityInStock(product, idCountMap.get(product.getId())))
                 .map(productRepository::saveAndFlush)
-                .map(good -> productMapper.toGoodInfo(good, idCountMap.get(good.getId())))
+                .map(product -> productMapper.toGoodInfo(product, idCountMap.get(product.getId())))
                 .toList();
     }
 

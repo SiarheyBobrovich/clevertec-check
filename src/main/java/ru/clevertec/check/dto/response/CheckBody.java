@@ -1,35 +1,29 @@
 package ru.clevertec.check.dto.response;
 
-import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.experimental.FieldDefaults;
-import ru.clevertec.check.constant.CheckConstant;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.Writer;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Builder
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CheckBody implements Printable {
+@Component
+@Scope("prototype")
+@RequiredArgsConstructor
+public class CheckBody extends AbstractTitlePrintable {
 
-    List<OrderResponseDto> goodList;
+    @Getter
+    @Value("${app.constant.body}")
+    private String title;
+
+    private final List<OrderResponseDto> goodList;
 
     @Override
-    @SneakyThrows
-    public void print(Writer writer) {
-        writer.append(CheckConstant.Body.QTY)
-                .append(CheckConstant.DELIMITER)
-                .append(CheckConstant.Body.DESCRIPTION)
-                .append(CheckConstant.DELIMITER)
-                .append(CheckConstant.Body.PRICE)
-                .append(CheckConstant.DELIMITER)
-                .append(CheckConstant.Body.DISCOUNT)
-                .append(CheckConstant.DELIMITER)
-                .append(CheckConstant.Body.TOTAL)
-                .append('\n');
-
+    protected void printBody(Writer writer) {
         goodList.forEach(good -> print(good, writer));
     }
 

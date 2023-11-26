@@ -20,7 +20,7 @@ public class ProductConfiguration {
     @Bean
     @SneakyThrows
     public Map<Long, Product> productFileMap(Environment environment) {
-        Path path = Paths.get(Objects.requireNonNull(environment.getProperty("spring.product.data.path")));
+        Path path = Paths.get(Objects.requireNonNull(environment.getProperty("app.product.data.load.file")));
 
         return Files.readAllLines(path).stream()
                 .skip(1)

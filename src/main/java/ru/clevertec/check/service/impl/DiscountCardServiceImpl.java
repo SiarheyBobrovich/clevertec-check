@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.clevertec.check.dto.request.DiscountCardDto;
-import ru.clevertec.check.dto.response.BalancedDiscountCard;
+import ru.clevertec.check.dto.BalancedDiscountCard;
 import ru.clevertec.check.mapper.DiscountCardMapper;
 import ru.clevertec.check.repository.DiscountCardRepository;
 import ru.clevertec.check.service.DiscountCardService;

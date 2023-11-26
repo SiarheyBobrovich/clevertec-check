@@ -1,10 +1,12 @@
 package ru.clevertec.check.dto.response;
 
-import lombok.Builder;
-import lombok.SneakyThrows;
-import ru.clevertec.check.constant.CheckConstant;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import ru.clevertec.check.entity.Product;
 
+import java.io.IOException;
 import java.io.Writer;
 import java.math.BigDecimal;
 
@@ -13,7 +15,9 @@ import static java.math.RoundingMode.HALF_UP;
 /**
  * DTO for {@link Product}
  */
-@Builder
+@Component
+@Scope("prototype")
+@RequiredArgsConstructor
 public class OrderResponseDto implements Printable {
 
     private final String description;
@@ -24,21 +28,26 @@ public class OrderResponseDto implements Printable {
     private BigDecimal total;
     private BigDecimal totalDiscount;
 
+    @Value("${app.constant.base.delimiter}")
+    private String delimiter;
+
+    @Value("${app.constant.base.currency}")
+    private String currency;
+
     @Override
-    @SneakyThrows
-    public void print(Writer writer) {
+    public void print(Writer writer) throws IOException {
         writer.append(count.toString())
-                .append(CheckConstant.DELIMITER)
+                .append(delimiter)
                 .append(description)
-                .append(CheckConstant.DELIMITER)
+                .append(delimiter)
                 .append(price.toString())
-                .append(CheckConstant.CURRENCY)
-                .append(CheckConstant.DELIMITER)
+                .append(currency)
+                .append(delimiter)
                 .append(getDiscount().toString())
-                .append(CheckConstant.CURRENCY)
-                .append(CheckConstant.DELIMITER)
+                .append(currency)
+                .append(delimiter)
                 .append(price.multiply(BigDecimal.valueOf(count)).setScale(2, HALF_UP).toString())
-                .append(CheckConstant.CURRENCY)
+                .append(currency)
                 .append('\n');
 
     }
