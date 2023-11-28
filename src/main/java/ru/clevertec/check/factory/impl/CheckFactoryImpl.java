@@ -25,18 +25,16 @@ public abstract class CheckFactoryImpl implements CheckFactory {
                              BalancedDiscountCard discountCard) {
         List<OrderResponseDto> orderResponseList = buildOrderResponseList(productInfoList, discountCard);
 
-        checkBalance(orderResponseList, discountCard);
-
         return getCheck(orderResponseList, discountCard);
     }
 
-    private void checkBalance(List<OrderResponseDto> orderResponseList,
-                              BalancedDiscountCard discountCard) throws BalanceNotAvailableException {
-        orderResponseList.stream()
-                .map(OrderResponseDto::getTotal)
-                .reduce(BigDecimal::add)
-                .filter(total -> discountCard.balance().compareTo(total) >= 0)
-                .orElseThrow(BalanceNotAvailableException::new);
+    private void checkBalanceMoreThenCheckTotal(CheckBody checkBody, BigDecimal balance) {
+        BigDecimal totalPrice = checkBody.getTotalPrice().subtract(checkBody.getTotalDiscount());
+        boolean isMore = balance.compareTo(totalPrice) >= 0;
+
+        if (!isMore) {
+            throw new BalanceNotAvailableException();
+        }
     }
 
     private List<OrderResponseDto> buildOrderResponseList(List<ProductInfo> productInfoList,
@@ -53,6 +51,9 @@ public abstract class CheckFactoryImpl implements CheckFactory {
     private Check getCheck(List<OrderResponseDto> orderResponseList,
                            BalancedDiscountCard balancedDiscountCard) {
         CheckBody checkBody = getBody(orderResponseList);
+
+        checkBalanceMoreThenCheckTotal(checkBody, balancedDiscountCard.balance());
+
         CheckTotal checkTotal = getTotal(checkBody);
 
         return buildCheck(getTitle(), checkBody, checkTotal, balancedDiscountCard);

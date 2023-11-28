@@ -21,6 +21,8 @@ public class CheckBody extends AbstractTitlePrintable {
     private String title;
 
     private final List<OrderResponseDto> goodList;
+    private BigDecimal totalPrice;
+    private BigDecimal totalDiscount;
 
     @Override
     protected void printBody(Writer writer) {
@@ -28,17 +30,25 @@ public class CheckBody extends AbstractTitlePrintable {
     }
 
     public BigDecimal getTotalPrice() {
-        return goodList.stream()
-                .map(OrderResponseDto::getTotal)
-                .reduce(BigDecimal::add)
-                .orElse(BigDecimal.ZERO);
+        if (totalPrice == null) {
+            totalPrice = goodList.stream()
+                    .map(OrderResponseDto::getTotal)
+                    .reduce(BigDecimal::add)
+                    .orElse(BigDecimal.ZERO);
+        }
+
+        return totalPrice;
     }
 
     public BigDecimal getTotalDiscount() {
-        return goodList.stream()
-                .map(OrderResponseDto::getDiscount)
-                .reduce(BigDecimal::add)
-                .orElse(BigDecimal.ZERO);
+        if (totalDiscount == null) {
+            totalDiscount = goodList.stream()
+                    .map(OrderResponseDto::getDiscount)
+                    .reduce(BigDecimal::add)
+                    .orElse(BigDecimal.ZERO);
+        }
+
+        return totalDiscount;
     }
 
     @SneakyThrows
