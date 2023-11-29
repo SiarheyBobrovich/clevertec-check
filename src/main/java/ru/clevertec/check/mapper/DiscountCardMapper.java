@@ -3,7 +3,7 @@ package ru.clevertec.check.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.clevertec.check.dto.request.DiscountCardDto;
-import ru.clevertec.check.dto.response.BalancedDiscountCard;
+import ru.clevertec.check.dto.BalancedDiscountCard;
 import ru.clevertec.check.entity.DiscountCard;
 
 import java.math.BigDecimal;

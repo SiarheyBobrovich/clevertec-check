@@ -6,8 +6,20 @@ spring:
   liquibase:
     drop-first: true
     enabled: false
+
+app:
+  constant:
+    base:
+      currency: "$"
+      percentage: "%"
+      delimiter: ";"
+    title: "Date${app.constant.base.delimiter}Time\n"
+    body: "QTY${app.constant.base.delimiter}DESCRIPTION${app.constant.base.delimiter}PRICE${app.constant.base.delimiter}DISCOUNT${app.constant.base.delimiter}TOTAL\n"
+    discount-card: "DISCOUNT CARD${app.constant.base.delimiter}DISCOUNT PERCENTAGE\n"
+    total: "TOTAL PRICE${app.constant.base.delimiter}TOTAL DISCOUNT${app.constant.base.delimiter}TOTAL WITH DISCOUNT\n"
   product:
     data:
       save:
         file: ./result.csv
-      path: ./src/main/resources/products.csv
+      load:
+        file: ./src/main/resources/products.csv

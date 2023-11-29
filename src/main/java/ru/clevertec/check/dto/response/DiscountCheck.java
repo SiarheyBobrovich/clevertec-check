@@ -16,7 +16,7 @@ import java.io.Writer;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class DiscountCheck extends Check {
 
-    BalancedDiscountCard balancedDiscountCard;
+    PrintableDiscountCard printableDiscountCard;
 
     @Override
     public void print(Writer writer) {
@@ -25,7 +25,7 @@ public class DiscountCheck extends Check {
             writer.write('\n');
             getCheckBody().print(writer);
             writer.write('\n');
-            balancedDiscountCard.print(writer);
+            printableDiscountCard.print(writer);
             writer.write('\n');
             getCheckTotal().print(writer);
             writer.write('\n');

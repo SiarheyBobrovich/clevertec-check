@@ -34,7 +34,7 @@ public class MainOrderProcessorImpl implements MainOrderProcessor {
     /**
      * Path to the saved file
      */
-    @Value("${spring.product.data.save.file}")
+    @Value("${app.product.data.save.file}")
     private String filePath;
 
     /**
