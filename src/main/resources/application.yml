@@ -22,4 +22,4 @@ app:
       save:
         file: ./result.csv
       load:
-        file: ./src/main/resources/products.csv
+        file: /products.csv

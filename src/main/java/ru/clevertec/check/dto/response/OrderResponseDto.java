@@ -40,7 +40,7 @@ public class OrderResponseDto implements Printable {
                 .append(delimiter)
                 .append(description)
                 .append(delimiter)
-                .append(price.toString())
+                .append(price.setScale(2, HALF_UP).toString())
                 .append(currency)
                 .append(delimiter)
                 .append(getDiscount().toString())
