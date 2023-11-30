@@ -1,6 +1,6 @@
 package ru.clevertec.check.validation.impl;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 import ru.clevertec.check.exception.ValidationException;
 import ru.clevertec.check.validation.Validator;
@@ -50,7 +50,7 @@ public class ValidatorImpl implements Validator<String[]> {
     private void checkArgs(String[] args) {
         boolean isAllArgsMatch = Arrays.stream(args)
                 .filter(Objects::nonNull)
-                .filter(Predicate.not(StringUtils::isBlank))
+                .filter(Predicate.not(Strings::isBlank))
                 .filter(arg -> arg.matches("(\\d+--?\\d+)|(discountCard=((\\d{4})|(null)))|(balanceDebitCard=-?(\\d+\\.?\\d*))"))
                 .count() == args.length;
 
